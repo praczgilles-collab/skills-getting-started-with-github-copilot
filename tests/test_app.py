@@ -19,12 +19,18 @@ def test_signup_and_unregister():
     client.post(f"/activities/{activity}/unregister?email={email}")
     response = client.post(f"/activities/{activity}/signup?email={email}")
     assert response.status_code == 200
+    # Vérifier que l'email est bien inscrit
+    activities = client.get("/activities").json()
+    assert email in activities[activity]["participants"]
     # Duplicate signup should fail
     response2 = client.post(f"/activities/{activity}/signup?email={email}")
     assert response2.status_code == 400
     # Unregister
     response3 = client.post(f"/activities/{activity}/unregister?email={email}")
     assert response3.status_code == 200
+    # Vérifier que l'email n'est plus inscrit
+    activities = client.get("/activities").json()
+    assert email not in activities[activity]["participants"]
     # Unregister again should fail
     response4 = client.post(f"/activities/{activity}/unregister?email={email}")
     assert response4.status_code == 404
