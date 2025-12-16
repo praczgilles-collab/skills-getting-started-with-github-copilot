@@ -26,7 +26,9 @@ def test_signup_and_unregister():
     response2 = client.post(f"/activities/{activity}/signup?email={email}")
     assert response2.status_code == 400
     # Unregister
+    print("Participants avant désinscription:", client.get("/activities").json()[activity]["participants"])
     response3 = client.post(f"/activities/{activity}/unregister?email={email}")
+    print("Réponse désinscription:", response3.status_code, response3.json())
     assert response3.status_code == 200
     # Vérifier que l'email n'est plus inscrit
     activities = client.get("/activities").json()
