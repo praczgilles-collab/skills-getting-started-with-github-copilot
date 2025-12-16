@@ -1,3 +1,13 @@
+"""
+High School Management System API
+
+A super simple FastAPI application that allows students to view and sign up
+for extracurricular activities at Mergington High School.
+"""
+# ...existing code...
+
+# Place the unregister route after app and activities are defined
+
 @app.post("/activities/{activity_name}/unregister")
 def unregister_from_activity(activity_name: str, email: str):
     """Unregister a student from an activity"""
