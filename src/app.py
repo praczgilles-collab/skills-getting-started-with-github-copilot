@@ -6,7 +6,7 @@ for extracurricular activities at Mergington High School.
 """
 # ...existing code...
 
-# Place the unregister route after app and activities are defined
+# Place the unregister route at the end, after app and activities are defined
 
 @app.post("/activities/{activity_name}/unregister")
 def unregister_from_activity(activity_name: str, email: str):
